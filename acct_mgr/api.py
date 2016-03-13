@@ -396,6 +396,8 @@ class AccountManager(Component):
 
     def user_created(self, user, password):
         self.log.info("Created new user: %s" % user)
+        # clear user cache
+        self.env.invalidate_known_users_cache()
 
     def user_password_changed(self, user, password):
         self.log.info("Updated password for user: %s" % user)
@@ -407,6 +409,7 @@ class AccountManager(Component):
         self.log.info("Password reset for user: %s, %s" % (user, email))
         
     def user_email_verification_requested(self, user, token):
+        self.env.invalidate_known_users_cache()
         self.log.info("Email verification requested for user: %s" % user)
 
     # IPermissionRequestor methods

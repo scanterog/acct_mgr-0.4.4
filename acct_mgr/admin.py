@@ -494,6 +494,7 @@ class AccountManagerAdminPanel(CommonTemplateProvider):
         data['ignore_auth_case'] = \
             self.config.getbool('trac', 'ignore_auth_case')
 
+        self.env.invalidate_known_users_cache()
         for username_, name, email in self.env.get_known_users():
             if username_ == username:
                 data['name'] = name

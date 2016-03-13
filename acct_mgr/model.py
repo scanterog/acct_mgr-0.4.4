@@ -216,6 +216,7 @@ def set_user_attribute(env, username, attribute, value, db=None):
             VALUES  (%s,1,%s,%s)
             """, (username, attribute, value))
     db.commit()
+    env.invalidate_known_users_cache()
 
 def del_user_attribute(env, username=None, authenticated=1, attribute=None,
                        db=None):
@@ -246,6 +247,7 @@ def del_user_attribute(env, username=None, authenticated=1, attribute=None,
     cursor = db.cursor()
     cursor.execute(sql, sql_args)
     db.commit()
+    env.invalidate_known_users_cache()
 
 def delete_user(env, user, db=None):
     # Delete session attributes, session and any custom permissions
@@ -265,6 +267,7 @@ def delete_user(env, user, db=None):
     # DEVEL: Is this really needed?
     db.close()
     env.log.debug("Purged session data and permissions for user '%s'" % user)
+    env.invalidate_known_users_cache()
 
 def last_seen(env, user=None, db=None):
     db = _get_db(env, db)

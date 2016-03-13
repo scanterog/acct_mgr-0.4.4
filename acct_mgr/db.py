@@ -88,6 +88,7 @@ class SessionStore(Component):
                 VALUES  (%s,1,%s,%s)
                 """, (user, self.key, hash))
         db.commit()
+        self.env.invalidate_known_users_cache()
         return not_exists
 
     def check_password(self, user, password):
@@ -132,6 +133,7 @@ class SessionStore(Component):
                 FROM    session_attribute
                 """ + sql, (self.key, user))
             db.commit()
+        self.env.invalidate_known_users_cache()
         return exists
 
     @property
