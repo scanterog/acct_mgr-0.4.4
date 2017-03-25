@@ -170,8 +170,9 @@ class BotTrapCheck(GenericRegistrationInspector):
 
             # TRANSLATOR: Hint for visible bot trap registration input field.
             hint = tag.p(Markup(_(
-                """Please type [%(token)s] as verification token,
-                exactly replicating everything within the braces.""",
+                """Apologies for the inconvenience, but please use the Sugarlabs Wiki,
+                find the page referring to find the gold in the pot, and insert here
+                the four words on the second line, or send mail to systems mailing list.""",
                 token=tag.b(self.reg_basic_token))), class_='hint')
             insert = tag(
                 tag.label(_("Parole:"),
